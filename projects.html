@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Projects | LuxeHaven Estates</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-yellow: #FFF9C4;
+            --accent-yellow: #FFEB3B;
+            --dark-yellow: #FBC02D;
+            --light-gold: #FFD54F;
+            --soft-grey: #F5F5F5;
+            --medium-grey: #E0E0E0;
+            --dark-grey: #424242;
+            --white: #FFFFFF;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--dark-grey);
+            overflow-x: hidden;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            background-color: rgba(255, 249, 196, 0.95);
+        }
+
+        nav.scrolled {
+            background-color: rgba(255, 249, 196, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 5%;
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--dark-grey);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--dark-yellow);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-grey);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--dark-yellow);
+        }
+
+        .nav-links a.active {
+            color: var(--dark-yellow);
+            font-weight: 600;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--dark-yellow);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--dark-grey);
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            height: 60vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 80px;
+        }
+
+        .page-header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .page-header-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Projects Filter */
+        .projects-filter {
+            background-color: var(--soft-grey);
+            padding: 40px 5%;
+            text-align: center;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            background-color: var(--white);
+            color: var(--dark-grey);
+            border: 2px solid var(--medium-grey);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background-color: var(--dark-yellow);
+            border-color: var(--dark-yellow);
+            color: var(--dark-grey);
+        }
+
+        /* Projects Section */
+        .projects-section {
+            padding: 80px 5%;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .project-card.hidden {
+            display: none;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-img {
+            height: 250px;
+            width: 100%;
+            background-color: var(--medium-grey);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-img img {
+            transform: scale(1.1);
+        }
+
+        .project-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .badge-ongoing {
+            background-color: var(--dark-yellow);
+        }
+
+        .badge-completed {
+            background-color: #4CAF50;
+        }
+
+        .project-info {
+            padding: 25px;
+        }
+
+        .project-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--dark-grey);
+        }
+
+        .project-location {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #757575;
+        }
+
+        .project-location i {
+            margin-right: 8px;
+            color: var(--dark-yellow);
+        }
+
+        .project-features {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--medium-grey);
+        }
+
+        .feature {
+            text-align: center;
+        }
+
+        .feature i {
+            font-size: 1.2rem;
+            color: var(--dark-yellow);
+            margin-bottom: 5px;
+        }
+
+        .feature span {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--dark-grey);
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .project-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark-yellow);
+        }
+
+        .project-btn {
+            background-color: var(--dark-yellow);
+            color: var(--dark-grey);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .project-btn:hover {
+            background-color: var(--dark-grey);
+            color: var(--white);
+        }
+
+        /* Project Details Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            max-width: 900px;
+            margin: 50px auto;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            animation: modalFadeIn 0.5s;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: var(--dark-grey);
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .modal-gallery img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .modal-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .modal-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-feature i {
+            color: var(--dark-yellow);
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-grey);
+            color: var(--white);
+            padding: 70px 5% 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--dark-yellow);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #BDBDBD;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--dark-yellow);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #424242;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--dark-yellow);
+            color: var(--dark-grey);
+            transform: translateY(-5px);
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            outline: none;
+        }
+
+        .newsletter-form button {
+            background-color: var(--dark-yellow);
+            color: var(--dark-grey);
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 30px 30px 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background-color: var(--light-gold);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #424242;
+            color: #BDBDBD;
+            font-size: 0.9rem;
+        }
+
+        /* Floating Icons */
+        .floating-icons {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .floating-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            animation: bounce 2s infinite;
+        }
+
+        .floating-icon.whatsapp {
+            background-color: #25D366;
+            animation-delay: 0.2s;
+        }
+
+        .floating-icon.call {
+            background-color: var(--dark-yellow);
+            animation-delay: 0.4s;
+        }
+
+        .floating-icon.email {
+            background-color: #EA4335;
+            animation-delay: 0.6s;
+        }
+
+        .floating-icon:hover {
+            transform: scale(1.1);
+        }
+
+        /* Animations */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .modal-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-header-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary-yellow);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .filter-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .filter-btn {
+                width: 200px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .page-header {
+                height: 50vh;
+                margin-top: 70px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-header-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .project-features {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .feature {
+                flex: 1 0 45%;
+            }
+            
+            .modal-body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav id="navbar">
+        <a href="index.html" class="logo">Luxe<span>Haven</span> Estates</a>
+        <div class="nav-links">
+            <a href="homepage.html">Home</a>
+            <a href="projects.html" class="active">Projects</a>
+            <a href="#">Construction</a>
+            <a href="homepage.html">About Us</a>
+            <a href="#">Reviews</a>
+            <a href="#">Contact</a>
+        </div>
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-content" data-aos="fade-up">
+            <h1>Our Premium Projects</h1>
+            <p>Discover our exclusive collection of luxury apartments and independent flats</p>
+        </div>
+    </section>
+
+    <!-- Projects Filter -->
+    <section class="projects-filter">
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="ongoing">Ongoing Projects</button>
+            <button class="filter-btn" data-filter="completed">Completed Projects</button>
+            <button class="filter-btn" data-filter="2bhk">2BHK Apartments</button>
+            <button class="filter-btn" data-filter="3bhk">3BHK Apartments</button>
+            <button class="filter-btn" data-filter="independent">Independent Flats</button>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects-section">
+        <div class="projects-grid">
+            <!-- Project 1 -->
+            <div class="project-card" data-category="ongoing 3bhk" data-aos="fade-up">
+                <div class="project-img">
+                    <img src="C:\DBShelters\images\arka.jpg" alt="Arka Lotus ">
+                    <div class="project-badge badge-ongoing">Ongoing</div>
+                </div>
+                <div class="project-info">
+                    <h3>Arka Lotus</h3>
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Adjacent to Ramanjaneyanagar</span>
+                    </div>
+                    <div class="project-features">
+                        <div class="feature">
+                            <i class="fas fa-bed"></i>
+                            <span>2 and 3 Bedroom</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-bath"></i>
+                            <span>2 Baths</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-vector-square"></i>
+                            <span>1450 sq.ft.</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-car"></i>
+                            <span>2 Parking</span>
+                        </div>
+                    </div>
+                    <div class="project-meta">
+                        <div class="project-price">$450,000</div>
+                        <button class="project-btn" data-project="1">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card" data-category="completed independent" data-aos="fade-up" data-aos-delay="100">
+                <div class="project-img">
+                    <img src="C:\DBShelters\images\nandhi.jpg" alt="Nandhi Shree Meadows">
+                    <div class="project-badge badge-completed">Completed</div>
+                </div>
+                <div class="project-info">
+                    <h3>Nandhi Shree Meadows</h3>
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Royal palm Layout off KANAKAPURAM MAIN ROAD</span>
+                    </div>
+                    <div class="project-features">
+                        <div class="feature">
+                            <i class="fas fa-bed"></i>
+                            <span>3 bhk LUXURY flats</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-bath"></i>
+                            <span>3 Baths</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-vector-square"></i>
+                            <span>2200 sq.ft.</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-car"></i>
+                            <span>3 Parking</span>
+                        </div>
+                    </div>
+                    <div class="project-meta">
+                        <div class="project-price">$680,000</div>
+                        <button class="project-btn" data-project="2">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card" data-category="ongoing 2bhk" data-aos="fade-up" data-aos-delay="200">
+                <div class="project-img">
+                    <img src="C:\DBShelters\images\naturenest.jpg"alt="Nature's Nest">
+                    <div class="project-badge badge-ongoing">Ongoing</div>
+                </div>
+                <div class="project-info">
+                    <h3>Nature's Nest</h3>
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Bsk 6th stage,1st block </span>
+                    </div>
+                    <div class="project-features">
+                        <div class="feature">
+                            <i class="fas fa-bed"></i>
+                            <span>3 bhk flats </span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-bath"></i>
+                            <span>2 Baths</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-vector-square"></i>
+                            <span>1100 sq.ft.</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-car"></i>
+                            <span>1 Parking</span>
+                        </div>
+                    </div>
+                    <div class="project-meta">
+                        <div class="project-price">$320,000</div>
+                        <button class="project-btn" data-project="3">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-card" data-category="completed 3bhk" data-aos="fade-up" data-aos-delay="300">
+                <div class="project-img">
+                    <img src="C:\DBShelters\images\sumukha.jpg"alt="Sumukha Residency">
+                    <div class="project-badge badge-completed">Completed</div>
+                </div>
+                <div class="project-info">
+                    <h3>Sumukha Residency</h3>
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Nagarbhavi circle </span>
+                    </div>
+                    <div class="project-features">
+                        <div class="feature">
+                            <i class="fas fa-bed"></i>
+                            <span>3 bhk flats </span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-bath"></i>
+                            <span>2.5 Baths</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-vector-square"></i>
+                            <span>1380 to 1595 sq.ft.</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-car"></i>
+                            <span>2 Parking</span>
+                        </div>
+                    </div>
+                    <div class="project-meta">
+                        <div class="project-price">1.24cr</div>
+                        <button class="project-btn" data-project="4">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="project-card" data-category="ongoing independent" data-aos="fade-up" data-aos-delay="400">
+                <div class="project-img">
+                    <img src="C:\DBShelters\images\shree.jpg" alt="SHREE SAMRUDDHI ENCLAVE">
+                    <div class="project-badge badge-ongoing">Ongoing</div>
+                </div>
+                <div class="project-info">
+                    <h3>SHREE SAMRUDDHI ENCLAVE</h3>
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Hoysala circle,Nagarbhavi</span>
+                    </div>
+                    <div class="project-features">
+                        <div class="feature">
+                            <i class="fas fa-bed"></i>
+                            <span>3 bhk flats</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-bath"></i>
+                            <span>3 Baths</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-vector-square"></i>
+                            <span>1800 sq.ft.</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-car"></i>
+                            <span>3 Parking</span>
+                        </div>
+                    </div>
+                    <div class="project-meta">
+                        <div class="project-price">1.20cr</div>
+                        <button class="project-btn" data-project="5">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 6 -->
+            <div class="project-card" data-category="completed 2bhk" data-aos="fade-up" data-aos-delay="500">
+                <div class="project-img">
+                    <img src="C:\DBShelters\images\ragved.jpg" alt="Ragved Royal View">
+                    <div class="project-badge badge-completed">Completed</div>
+                </div>
+                <div class="project-info">
+                    <h3>Ragved Royal View</h3>
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>suncity layout,kengeri</span>
+                    </div>
+                    <div class="project-features">
+                        <div class="feature">
+                            <i class="fas fa-bed"></i>
+                            <span>3bhk flats</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-bath"></i>
+                            <span>2 Baths</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-vector-square"></i>
+                            <span>1500 sq.ft.</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-car"></i>
+                            <span>1 Parking</span>
+                        </div>
+                    </div>
+                    <div class="project-meta">
+                        <div class="project-price">1.10cr</div>
+                        <button class="project-btn" data-project="6">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Details Modal -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <div class="modal-body" id="modalBody">
+                <!-- Modal content will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>LuxeHaven Estates</h3>
+                <p>Creating exceptional living spaces with uncompromising quality and timeless design.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="construction.html">Construction</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="reviews.html">Reviews</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Luxury Avenue, Premium District</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> info@luxehaven.com</li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for updates on new projects and exclusive offers.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your Email Address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 LuxeHaven Estates. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Icons -->
+    <div class="floating-icons">
+        <a href="https://wa.me/15551234567" class="floating-icon whatsapp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="tel:+15551234567" class="floating-icon call">
+            <i class="fas fa-phone"></i>
+        </a>
+        <a href="mailto:info@luxehaven.com" class="floating-icon email">
+            <i class="fas fa-envelope"></i>
+        </a>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS (Animate On Scroll)
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+        });
+
+        // Project filtering functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const filterValue = button.getAttribute('data-filter');
+                
+                projectCards.forEach(card => {
+                    if (filterValue === 'all') {
+                        card.classList.remove('hidden');
+                    } else {
+                        if (card.getAttribute('data-category').includes(filterValue)) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+        });
+
+        // Project modal functionality
+        const projectModal = document.getElementById('projectModal');
+        const modalBody = document.getElementById('modalBody');
+        const closeModal = document.querySelector('.close-modal');
+        const projectButtons = document.querySelectorAll('.project-btn');
+
+        // Project data for modal
+        const projectsData = {
+            1: {
+                title: "Skyline Residences",
+                status: "Ongoing",
+                type: "3BHK Apartments",
+                location: "Premium District, Downtown",
+                price: "$450,000",
+                description: "Luxury high-rise apartments with panoramic city views and premium amenities. Featuring modern architecture, smart home technology, and exclusive resident facilities.",
+                features: [
+                    "Floor-to-ceiling windows",
+                    "Smart home automation",
+                    "Infinity pool",
+                    "Rooftop garden",
+                    "Fitness center",
+                    "24/7 security",
+                    "Concierge service",
+                    "Underground parking"
+                ],
+                images: [
+                    "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2053&q=80",
+                    "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                    "https://images.unsplash.com/photo-1600607687644-c7171b42498b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                ]
+            },
+            2: {
+                title: "Garden Villas",
+                status: "Completed",
+                type: "Independent Flats",
+                location: "Green Valley, Suburbs",
+                price: "$680,000",
+                description: "Spacious independent flats with private gardens and modern amenities. These villas offer the perfect blend of luxury living and natural surroundings.",
+                features: [
+                    "Private garden",
+                    "Modern kitchen",
+                    "Walk-in closets",
+                    "Home office space",
+                    "Solar panels",
+                    "Rainwater harvesting",
+                    "Community park",
+                    "Children's play area"
+                ],
+                images: [
+                    "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2053&q=80",
+                    "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                    "https://images.unsplash.com/photo-1600607687644-c7171b42498b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                ]
+            },
+            // Additional project data would go here for projects 3-6
+        };
+
+        // Open modal when project button is clicked
+        projectButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const projectId = button.getAttribute('data-project');
+                const project = projectsData[projectId];
+                
+                if (project) {
+                    modalBody.innerHTML = `
+                        <h2>${project.title}</h2>
+                        <div class="project-meta" style="margin: 15px 0; display: flex; gap: 15px;">
+                            <span class="project-badge ${project.status === 'Ongoing' ? 'badge-ongoing' : 'badge-completed'}">${project.status}</span>
+                            <span style="background: #E0E0E0; padding: 5px 15px; border-radius: 20px;">${project.type}</span>
+                        </div>
+                        <div class="project-location" style="margin-bottom: 20px;">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>${project.location}</span>
+                        </div>
+                        <div class="modal-gallery">
+                            ${project.images.map(img => `<img src="${img}" alt="${project.title}">`).join('')}
+                        </div>
+                        <p style="margin-bottom: 20px; line-height: 1.6;">${project.description}</p>
+                        <h3 style="margin-bottom: 15px;">Features & Amenities</h3>
+                        <div class="modal-features">
+                            ${project.features.map(feature => `
+                                <div class="modal-feature">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>${feature}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #E0E0E0;">
+                            <div class="project-price" style="font-size: 1.8rem;">${project.price}</div>
+                            <button class="project-btn" style="padding: 12px 30px;">Book a Site Visit</button>
+                        </div>
+                    `;
+                    
+                    projectModal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        // Close modal
+        closeModal.addEventListener('click', () => {
+            projectModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === projectModal) {
+                projectModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>
